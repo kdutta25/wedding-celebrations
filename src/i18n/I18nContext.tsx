@@ -55,6 +55,21 @@ export function I18nProvider({ children }: { children: ReactNode }) {
         translations[language].pageDescription,
       );
     }
+
+    const ogTitle = document.querySelector('meta[property="og:title"]');
+    if (ogTitle) {
+      ogTitle.setAttribute("content", translations[language].pageTitle);
+    }
+
+    const ogDescription = document.querySelector(
+      'meta[property="og:description"]',
+    );
+    if (ogDescription) {
+      ogDescription.setAttribute(
+        "content",
+        translations[language].pageDescription,
+      );
+    }
   }, [language]);
 
   const t = useCallback(

@@ -17,10 +17,10 @@ const thumbCacheRoot = join(root, ".cache", "album-thumbs");
 const imageExt = /\.(jpe?g|png|webp|gif|avif)$/i;
 const THUMB_WIDTH = 500;
 const THUMB_QUALITY = 75;
-const OG_WIDTH = 2400;
-const OG_HEIGHT = 1260;
+const OG_WIDTH = 1200;
+const OG_HEIGHT = 630;
 const OG_UPSCALE_WIDTH = 4800;
-const OG_QUALITY = 92;
+const OG_QUALITY = 90;
 const ogPreviewPath = join(root, "public", "og-preview.jpg");
 const ogCachePath = join(root, ".cache", "og-preview-hd.jpg");
 const landingHeroPath = join(root, "src", "assets", "landing-hero.png");
@@ -163,7 +163,7 @@ async function ensureOgPreview(sourcePath) {
   if (existsSync(ogCachePath)) {
     const meta = await sharp(ogCachePath).metadata();
     console.log(
-      `OG preview → public/og-preview.jpg (${meta.width}×${meta.height}, HD upscaled from source).`,
+      `OG preview → public/og-preview.jpg (${meta.width}×${meta.height}, social / link-preview size).`,
     );
   }
 }
