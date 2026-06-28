@@ -1,7 +1,9 @@
+import { Link } from "react-router-dom";
 import styledWithConfig from "../utils/styledWithConfig";
 import { languageOptions, viewTitleKey, type ViewId } from "../i18n/translations";
 import { useI18n } from "../i18n/I18nContext";
 import { useTheme } from "../theme/ThemeContext";
+import { ROUTES } from "../routes";
 
 const Bar = styledWithConfig("div")`
   display: grid;
@@ -67,7 +69,7 @@ const Controls = styledWithConfig("div")`
   }
 `;
 
-const BackButton = styledWithConfig("button")`
+const BackLink = styledWithConfig(Link)`
   border: 1px solid var(--pref-border);
   background: var(--pref-control-bg);
   color: var(--ink);
@@ -77,6 +79,7 @@ const BackButton = styledWithConfig("button")`
   font-weight: 600;
   cursor: pointer;
   padding: 8px 14px;
+  text-decoration: none;
 
   &:focus-visible {
     outline: 3px solid var(--accent-dark);
@@ -139,10 +142,9 @@ const ThemeButton = styledWithConfig("button")`
 
 type PreferencesBarProps = {
   view: ViewId;
-  onNavigate: (view: ViewId) => void;
 };
 
-export function PreferencesBar({ view, onNavigate }: PreferencesBarProps) {
+export function PreferencesBar({ view }: PreferencesBarProps) {
   const { language, setLanguage, t } = useI18n();
   const { theme, toggleTheme } = useTheme();
 
@@ -154,19 +156,13 @@ export function PreferencesBar({ view, onNavigate }: PreferencesBarProps) {
     >
       <Left data-component-id="ToolbarLeft">
         {view !== "landing" ? (
-          <BackButton
-            data-component-id="BackHomeButton"
-            type="button"
-            onClick={() => onNavigate("landing")}
-          >
+          <BackLink data-component-id="BackHomeButton" to={ROUTES.home}>
             ← {t("backHome")}
-          </BackButton>
+          </BackLink>
         ) : null}
       </Left>
 
-      <Title data-component-id="ToolbarTitle">
-        {t(viewTitleKey(view))}
-      </Title>
+      <Title data-component-id="ToolbarTitle">{t(viewTitleKey(view))}</Title>
 
       <Controls data-component-id="ToolbarControls">
         <Control data-component-id="LanguageControl">

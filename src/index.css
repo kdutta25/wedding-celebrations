@@ -29,6 +29,9 @@
   --nav-card-wedding: linear-gradient(145deg, #fce4ec 0%, #f8bbd0 100%);
   --nav-card-ceremony: linear-gradient(145deg, #e0f2f1 0%, #b2dfdb 100%);
   --lightbox-bg: rgba(16, 32, 32, 0.9);
+  --peacock-opacity: 0.52;
+  --peacock-feather-opacity: 0.38;
+  --section-decor-opacity: 0.62;
 }
 
 [data-theme="dark"] {
@@ -60,6 +63,9 @@
   --nav-card-wedding: linear-gradient(145deg, #3d2030 0%, #5c2a40 100%);
   --nav-card-ceremony: linear-gradient(145deg, #1a3333 0%, #1f4a4a 100%);
   --lightbox-bg: rgba(6, 12, 12, 0.95);
+  --peacock-opacity: 0.34;
+  --peacock-feather-opacity: 0.24;
+  --section-decor-opacity: 0.48;
 }
 
 [data-section="haldi"] {

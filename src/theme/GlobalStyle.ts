@@ -11,6 +11,90 @@ export const rise = keyframes`
   }
 `;
 
+export const peacockFloatLeft = keyframes`
+  0%,
+  100% {
+    transform: translate(0, 0) rotate(-1.5deg);
+  }
+  35% {
+    transform: translate(10px, -22px) rotate(1deg);
+  }
+  70% {
+    transform: translate(-8px, 14px) rotate(-2.5deg);
+  }
+`;
+
+export const peacockFloatRight = keyframes`
+  0%,
+  100% {
+    transform: translate(0, 0) rotate(1.5deg);
+  }
+  35% {
+    transform: translate(-10px, -18px) rotate(-1deg);
+  }
+  70% {
+    transform: translate(8px, 16px) rotate(2.5deg);
+  }
+`;
+
+export const peacockTailSway = keyframes`
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(4deg);
+  }
+`;
+
+export const featherDrift = keyframes`
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 0.35;
+  }
+  50% {
+    transform: translateY(-14px) rotate(8deg);
+    opacity: 0.55;
+  }
+`;
+
+export const decorFloatLeft = keyframes`
+  0%,
+  100% {
+    transform: translate(0, 0) rotate(-2deg);
+  }
+  40% {
+    transform: translate(12px, -20px) rotate(2deg);
+  }
+  75% {
+    transform: translate(-6px, 12px) rotate(-3deg);
+  }
+`;
+
+export const decorFloatRight = keyframes`
+  0%,
+  100% {
+    transform: translate(0, 0) rotate(2deg);
+  }
+  40% {
+    transform: translate(-12px, -16px) rotate(-2deg);
+  }
+  75% {
+    transform: translate(8px, 14px) rotate(3deg);
+  }
+`;
+
+export const ringSpin = keyframes`
+  0%,
+  100% {
+    transform: rotate(-8deg);
+  }
+  50% {
+    transform: rotate(8deg);
+  }
+`;
+
 export const GlobalStyle = createGlobalStyle`
   *,
   *::before,

@@ -77,7 +77,7 @@ const DateLine = styledWithConfig("p")`
 type SectionHeroProps = {
   imageSrc: string;
   heroAltKey: TranslationKey;
-  kickerKey: TranslationKey;
+  kickerKey?: TranslationKey;
   title: string;
   leadKey: TranslationKey;
   showDate?: boolean;
@@ -101,7 +101,9 @@ export function SectionHero({
         alt={t(heroAltKey)}
       />
       <CardBody data-component-id="SectionHeroBody">
-        <Kicker data-component-id="SectionHeroKicker">{t(kickerKey)}</Kicker>
+        {kickerKey ? (
+          <Kicker data-component-id="SectionHeroKicker">{t(kickerKey)}</Kicker>
+        ) : null}
         <ScriptTitle data-component-id="SectionHeroTitle">{title}</ScriptTitle>
         <Lead data-component-id="SectionHeroLead">{t(leadKey)}</Lead>
         {showDate ? (

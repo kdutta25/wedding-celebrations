@@ -1,13 +1,22 @@
 import { useEffect, useState } from "react";
+import {
+  Link,
+  Navigate,
+  Route,
+  Routes,
+  useLocation,
+} from "react-router-dom";
 import styledWithConfig from "./utils/styledWithConfig";
 import { Gallery } from "./components/Gallery";
 import { LandingPage } from "./components/LandingPage";
 import { PreferencesBar } from "./components/PreferencesBar";
 import { SectionHero } from "./components/SectionHero";
 import { CeremonyTimeline } from "./components/CeremonyTimeline";
+import { PeacockDecorations } from "./components/PeacockDecorations";
+import { SectionDecorations } from "./components/SectionDecorations";
 import { SiteFooter } from "./components/SiteFooter";
 import { loadPhotos } from "./utils/photos";
-import { type ViewId } from "./i18n/translations";
+import { viewFromPathname, ROUTES } from "./routes";
 import { useI18n } from "./i18n/I18nContext";
 import haldiHero from "./assets/haldi-hero.png";
 import weddingHero from "./assets/wedding-hero.png";
@@ -37,7 +46,7 @@ const CeremonyLinkWrap = styledWithConfig("div")`
   margin-top: 8px;
 `;
 
-const CeremonyLink = styledWithConfig("button")`
+const CeremonyLink = styledWithConfig(Link)`
   border: 1px solid var(--pref-border);
   background: var(--pref-control-bg);
   color: var(--ink);
@@ -47,6 +56,7 @@ const CeremonyLink = styledWithConfig("button")`
   font-weight: 700;
   cursor: pointer;
   padding: 10px 18px;
+  text-decoration: none;
 
   &:focus-visible {
     outline: 3px solid var(--accent-dark);
@@ -56,7 +66,8 @@ const CeremonyLink = styledWithConfig("button")`
 
 export default function App() {
   const { t } = useI18n();
-  const [view, setView] = useState<ViewId>("landing");
+  const location = useLocation();
+  const view = viewFromPathname(location.pathname);
   const [haldiPhotos, setHaldiPhotos] = useState<string[]>([]);
   const [weddingPhotos, setWeddingPhotos] = useState<string[]>([]);
 
@@ -74,54 +85,61 @@ export default function App() {
       delete document.documentElement.dataset.section;
     }
     window.scrollTo({ top: 0, behavior: "smooth" });
-  }, [view]);
+  }, [location.pathname, view]);
 
   return (
     <Page data-component-id="Page">
+      <PeacockDecorations view={view} />
+      <SectionDecorations view={view} />
       <Shell data-component-id="Shell">
-        <PreferencesBar view={view} onNavigate={setView} />
+        <PreferencesBar view={view} />
 
-        {view === "landing" ? (
-          <LandingPage onNavigate={setView} />
-        ) : null}
-
-        {view === "haldi" ? (
-          <>
-            <SectionHero
-              imageSrc={haldiHero}
-              heroAltKey="haldiHeroAlt"
-              kickerKey="haldiKicker"
-              title="Haldi & Mehndi"
-              leadKey="haldiLead"
-            />
-            <Gallery albumId="haldi" photos={haldiPhotos} />
-          </>
-        ) : null}
-
-        {view === "wedding" ? (
-          <>
-            <SectionHero
-              imageSrc={weddingHero}
-              heroAltKey="weddingHeroAlt"
-              kickerKey="weddingKicker"
-              title="Vibha & Kaustubh"
-              leadKey="weddingLead"
-              showDate
-            />
-            <CeremonyLinkWrap data-component-id="CeremonyLinkWrap">
-              <CeremonyLink
-                data-component-id="CeremonyLinkButton"
-                type="button"
-                onClick={() => setView("ceremony")}
-              >
-                {t("viewCeremony")}
-              </CeremonyLink>
-            </CeremonyLinkWrap>
-            <Gallery albumId="wedding" photos={weddingPhotos} />
-          </>
-        ) : null}
-
-        {view === "ceremony" ? <CeremonyTimeline /> : null}
+        <Routes>
+          <Route path={ROUTES.home} element={<LandingPage />} />
+          <Route
+            path={ROUTES.haldi}
+            element={
+              <>
+                <SectionHero
+                  imageSrc={haldiHero}
+                  heroAltKey="haldiHeroAlt"
+                  title="Haldi & Mehndi"
+                  leadKey="haldiLead"
+                />
+                <Gallery albumId="haldi" photos={haldiPhotos} />
+              </>
+            }
+          />
+          <Route
+            path={ROUTES.wedding}
+            element={
+              <>
+                <SectionHero
+                  imageSrc={weddingHero}
+                  heroAltKey="weddingHeroAlt"
+                  kickerKey="weddingKicker"
+                  title="Vibha & Kaustubh"
+                  leadKey="weddingLead"
+                  showDate
+                />
+                <CeremonyLinkWrap data-component-id="CeremonyLinkWrap">
+                  <CeremonyLink
+                    data-component-id="CeremonyLinkButton"
+                    to={ROUTES.weddingProceedings}
+                  >
+                    {t("viewCeremony")}
+                  </CeremonyLink>
+                </CeremonyLinkWrap>
+                <Gallery albumId="wedding" photos={weddingPhotos} />
+              </>
+            }
+          />
+          <Route
+            path={ROUTES.weddingProceedings}
+            element={<CeremonyTimeline />}
+          />
+          <Route path="*" element={<Navigate to={ROUTES.home} replace />} />
+        </Routes>
 
         <SiteFooter />
       </Shell>

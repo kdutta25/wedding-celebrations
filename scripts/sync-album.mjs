@@ -17,11 +17,14 @@ const thumbCacheRoot = join(root, ".cache", "album-thumbs");
 const imageExt = /\.(jpe?g|png|webp|gif|avif)$/i;
 const THUMB_WIDTH = 500;
 const THUMB_QUALITY = 75;
-const OG_WIDTH = 1200;
-const OG_HEIGHT = 630;
-const OG_QUALITY = 85;
+const OG_WIDTH = 2400;
+const OG_HEIGHT = 1260;
+const OG_UPSCALE_WIDTH = 4800;
+const OG_QUALITY = 92;
 const ogPreviewPath = join(root, "public", "og-preview.jpg");
-const ogCachePath = join(root, ".cache", "og-preview.jpg");
+const ogCachePath = join(root, ".cache", "og-preview-hd.jpg");
+const landingHeroPath = join(root, "src", "assets", "landing-hero.png");
+const landingHeroCachePath = join(root, ".cache", "landing-hero-hd.png");
 
 const albums = [
   {
@@ -93,23 +96,76 @@ async function ensureThumb(sourcePath, photo, albumId) {
   return "cached";
 }
 
-async function ensureOgPreview(landingHeroPath) {
-  if (!existsSync(landingHeroPath)) {
-    console.warn("Landing hero not found — skipping og-preview.jpg.");
+function resolveOgSource() {
+  const desktopSource = join(homedir(), "Desktop", "og-preview.jpg");
+  if (existsSync(desktopSource)) {
+    return desktopSource;
+  }
+  if (existsSync(landingHeroPath)) {
+    return landingHeroPath;
+  }
+  return null;
+}
+
+async function buildHdMaster(sourcePath) {
+  return sharp(sourcePath)
+    .rotate()
+    .resize(OG_UPSCALE_WIDTH, null, {
+      kernel: sharp.kernel.lanczos3,
+      withoutEnlargement: false,
+    })
+    .sharpen({ sigma: 0.65, m1: 0.5, m2: 0.35, x1: 2, y2: 10 });
+}
+
+async function ensureOgPreview(sourcePath) {
+  if (!sourcePath) {
+    console.warn("OG preview source not found — skipping og-preview.jpg.");
     return;
   }
 
-  if (isSourceNewer(landingHeroPath, ogCachePath)) {
-    mkdirSync(dirname(ogCachePath), { recursive: true });
-    await sharp(landingHeroPath)
-      .rotate()
-      .resize(OG_WIDTH, OG_HEIGHT, { fit: "cover", position: "centre" })
-      .jpeg({ quality: OG_QUALITY, mozjpeg: true })
-      .toFile(ogCachePath);
+  const needsOg = isSourceNewer(sourcePath, ogCachePath);
+  const needsHero = isSourceNewer(sourcePath, landingHeroCachePath);
+
+  if (needsOg || needsHero) {
+    const master = await buildHdMaster(sourcePath);
+
+    if (needsOg) {
+      mkdirSync(dirname(ogCachePath), { recursive: true });
+      await master
+        .clone()
+        .resize(OG_WIDTH, OG_HEIGHT, { fit: "cover", position: "centre" })
+        .jpeg({ quality: OG_QUALITY, mozjpeg: true, chromaSubsampling: "4:4:4" })
+        .toFile(ogCachePath);
+    }
+
+    if (needsHero) {
+      mkdirSync(dirname(landingHeroCachePath), { recursive: true });
+      await master
+        .clone()
+        .resize(2400, null, {
+          kernel: sharp.kernel.lanczos3,
+          withoutEnlargement: false,
+        })
+        .png({ compressionLevel: 9, adaptiveFiltering: true })
+        .toFile(landingHeroCachePath);
+    }
   }
 
-  mkdirSync(dirname(ogPreviewPath), { recursive: true });
-  cpSync(ogCachePath, ogPreviewPath);
+  if (existsSync(ogCachePath)) {
+    mkdirSync(dirname(ogPreviewPath), { recursive: true });
+    cpSync(ogCachePath, ogPreviewPath);
+  }
+
+  if (existsSync(landingHeroCachePath)) {
+    cpSync(landingHeroCachePath, landingHeroPath);
+  }
+
+  if (existsSync(ogCachePath)) {
+    const meta = await sharp(ogCachePath).metadata();
+    console.log(
+      `OG preview → public/og-preview.jpg (${meta.width}×${meta.height}, HD upscaled from source).`,
+    );
+  }
 }
 
 async function syncAlbum({ id, source }) {
@@ -180,8 +236,7 @@ async function main() {
     results.push(await syncAlbum(album));
   }
 
-  const landingHero = join(root, "src", "assets", "landing-hero.png");
-  await ensureOgPreview(landingHero);
+  await ensureOgPreview(resolveOgSource());
 
   for (const result of results) {
     console.log(

@@ -9,13 +9,17 @@ export type TranslationKey =
   | "landingKicker"
   | "landingLead"
   | "landingDate"
+  | "landingDates"
   | "landingHeroAlt"
   | "navHaldi"
   | "navHaldiDesc"
+  | "navHaldiBadge"
   | "navWedding"
   | "navWeddingDesc"
+  | "navWeddingBadge"
   | "navCeremony"
   | "navCeremonyDesc"
+  | "navCeremonyBadge"
   | "haldiTitle"
   | "haldiKicker"
   | "haldiLead"
@@ -74,16 +78,20 @@ const en: Translations = {
   toolbarTitle: "Vibha & Kaustubh",
   landingKicker: "Together with their families",
   landingLead:
-    "Welcome to our wedding celebrations. Explore the Haldi & Mehndi, wedding photos, and ceremony proceedings.",
+    "Explore the Haldi & Mehndi, wedding photos, and ceremony proceedings.",
   landingDate: "February 26, 2023",
+  landingDates: "Feb 24 · 25 · 26, 2023",
   landingHeroAlt:
     "Vibha & Kaustubh wedding ceremony invitation with peacock motifs",
-  navHaldi: "Haldi & Mehndi",
+  navHaldi: "Haldi",
   navHaldiDesc: "Sunflowers, turmeric, and pre-wedding joy",
+  navHaldiBadge: "225 photos",
   navWedding: "Wedding",
   navWeddingDesc: "Our wedding day memories",
+  navWeddingBadge: "182 photos",
   navCeremony: "Ceremony",
   navCeremonyDesc: "How the Hindu wedding unfolded",
+  navCeremonyBadge: "21 steps",
   haldiTitle: "Haldi & Mehndi",
   haldiKicker: "Welcome to the celebration",
   haldiLead:
@@ -146,14 +154,18 @@ const hi: Translations = {
   toolbarTitle: "विभा और Kaustubh",
   landingKicker: "अपने परिवारों के साथ",
   landingLead:
-    "हमारे विवाह उत्सव में आपका स्वागत है। हल्दी और मेंहदी, विवाह की तस्वीरें और समारोह देखें।",
+    "हल्दी और मेंहदी, विवाह की तस्वीरें और समारोह देखें।",
   landingDate: "26 फरवरी, 2023",
-  navHaldi: "हल्दी और मेंहदी",
+  landingDates: "24 · 25 · 26 फरवरी, 2023",
+  navHaldi: "हल्दी",
   navHaldiDesc: "सूरजमुखी, हल्दी और पूर्व-विवाह उत्सव",
+  navHaldiBadge: "225 फोटो",
   navWedding: "विवाह",
   navWeddingDesc: "हमारे विवाह दिवस की यादें",
+  navWeddingBadge: "182 फोटो",
   navCeremony: "समारोह",
   navCeremonyDesc: "हिंदू विवाह कैसे संपन्न हुआ",
+  navCeremonyBadge: "21 चरण",
   haldiTitle: "हल्दी और मेंहदी",
   haldiKicker: "उत्सव में आपका स्वागत है",
   haldiLead: "विभा और Kaustubh की जीवंत हल्दी और मेंहदी समारोह की यादें।",
@@ -188,14 +200,18 @@ const pa: Translations = {
   toolbarTitle: "ਵਿਭਾ ਅਤੇ Kaustubh",
   landingKicker: "ਆਪਣੇ ਪਰਿਵਾਰਾਂ ਨਾਲ",
   landingLead:
-    "ਸਾਡੇ ਵਿਆਹ ਦੇ ਜਸ਼ਨ ਵਿੱਚ ਤੁਹਾਡਾ ਸਵਾਗਤ ਹੈ। ਹਲਦੀ, ਵਿਆਹ ਦੀਆਂ ਤਸਵੀਰਾਂ ਅਤੇ ਰਸਮਾਂ ਦੇਖੋ।",
+    "ਹਲਦੀ, ਵਿਆਹ ਦੀਆਂ ਤਸਵੀਰਾਂ ਅਤੇ ਰਸਮਾਂ ਦੇਖੋ।",
   landingDate: "26 ਫਰਵਰੀ, 2023",
-  navHaldi: "ਹਲਦੀ ਅਤੇ Mehndi",
+  landingDates: "24 · 25 · 26 ਫਰਵਰੀ, 2023",
+  navHaldi: "ਹਲਦੀ",
   navHaldiDesc: "ਸੂਰਜਮੁਖੀ, ਹਲਦੀ ਅਤੇ ਪੂਰਵ-ਵਿਆਹ ਖੁਸ਼ੀ",
+  navHaldiBadge: "225 ਫੋਟੋ",
   navWedding: "ਵਿਆਹ",
   navWeddingDesc: "ਸਾਡੇ ਵਿਆਹ ਦਿਨ ਦੀਆਂ ਯਾਦਾਂ",
+  navWeddingBadge: "182 ਫੋਟੋ",
   navCeremony: "ਰਸਮ",
   navCeremonyDesc: "ਹਿੰਦੂ ਵਿਆਹ ਕਿਵੇਂ ਹੋਇਆ",
+  navCeremonyBadge: "21 kadam",
   haldiTitle: "ਹਲਦੀ ਅਤੇ Mehndi",
   haldiKicker: "ਜਸ਼ਨ ਵਿੱਚ ਸਵਾਗਤ",
   haldiLead: "ਵਿਭਾ ਅਤੇ Kaustubh ਦੀ ਜੀਵੰਤ ਹਲਦੀ ਅਤੇ Mehndi ਰਸਮ।",
@@ -222,14 +238,18 @@ const bn: Translations = {
   toolbarTitle: "বিবা ও Kaustubh",
   landingKicker: "তাদের পরিবারের সাথে",
   landingLead:
-    "আমাদের বিবাহ উৎসবে স্বাগতম। হলুদ, বিবাহের ছবি ও অনুষ্ঠানের বিবরণ দেখুন।",
+    "হলুদ, বিবাহের ছবি ও অনুষ্ঠানের বিবরণ দেখুন।",
   landingDate: "২৬ ফেব্রুয়ারি, ২০২৩",
-  navHaldi: "হলুদ ও Mehndi",
+  landingDates: "২৪ · ২৫ · ২৬ ফেব্রুয়ারি, ২০২৩",
+  navHaldi: "হলুদ",
   navHaldiDesc: "সূর্যমুখী, হলুদ ও প্রাক-বিবাহ আনন্দ",
+  navHaldiBadge: "২২৫ ছবি",
   navWedding: "বিবাহ",
   navWeddingDesc: "আমাদের বিবাহ দিবসের স্মৃতি",
+  navWeddingBadge: "১৮২ ছবি",
   navCeremony: "অনুষ্ঠান",
   navCeremonyDesc: "হিন্দু বিবাহ কীভাবে সম্পন্ন হয়েছিল",
+  navCeremonyBadge: "২১ ধাপ",
   haldiTitle: "হলুদ ও Mehndi",
   haldiKicker: "উৎসবে স্বাগতম",
   haldiLead: "বিবা ও Kaustubh-এর প্রাণবন্ত হলুদ ও mehndi অনুষ্ঠান।",
