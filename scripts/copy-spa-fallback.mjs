@@ -7,7 +7,7 @@ const index = join(dist, "index.html");
 const fallback = join(dist, "404.html");
 
 if (!existsSync(index)) {
-  console.warn("dist/index.html not found — skipping SPA fallback copy.");
+  console.warn("dist/index.html not found : skipping SPA fallback copy.");
   process.exit(0);
 }
 

@@ -119,7 +119,7 @@ async function buildHdMaster(sourcePath) {
 
 async function ensureOgPreview(sourcePath) {
   if (!sourcePath) {
-    console.warn("OG preview source not found — skipping og-preview.jpg.");
+    console.warn("OG preview source not found : skipping og-preview.jpg.");
     return;
   }
 

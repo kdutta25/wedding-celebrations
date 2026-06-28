@@ -1,13 +1,13 @@
-# Vibha & Kaustubh — Wedding Celebrations
+# Vibha & Kaustubh : Wedding Celebrations
 
 A React + TypeScript + Vite photo gallery for the Haldi and Wedding celebrations (February 2023), with ceremony proceedings from the wedding program.
 
 ## Features
 
-- **Landing page** — peacock wedding invitation theme with navigation tiles
-- **Haldi** (`/haldi`) — photo gallery with sunflower/turmeric hero
-- **Wedding** (`/wedding`) — photo gallery with blush/rose welcome hero
-- **Ceremony proceedings** (`/wedding-proceedings`) — step-by-step timeline from the wedding program PDF
+- **Landing page** : peacock wedding invitation theme with navigation tiles
+- **Haldi** (`/haldi`) : photo gallery with sunflower/turmeric hero
+- **Wedding** (`/wedding`) : photo gallery with blush/rose welcome hero
+- **Ceremony proceedings** (`/wedding-proceedings`) : step-by-step timeline from the wedding program PDF
 - **Light / dark theme** and **4 languages** (English, Hindi, Punjabi, Bengali)
 - Lazy-loaded galleries, lightbox with swipe/download/progress, floating section decorations
 
@@ -139,7 +139,7 @@ Runs automatically before `dev`, `start`, and `build`:
 **What is gitignored**
 
 ```
-public/album/    # ~400 photos — too large for the repo
+public/album/    # ~400 photos : too large for the repo
 .cache/          # Generated thumb/OG cache
 dist/            # Build output
 ```
@@ -178,6 +178,6 @@ Production builds serve at the site root (`/`) on `https://wedding.kaustubhdutta
 ## Tech stack
 
 - **React 19** + **TypeScript** + **Vite 6**
-- **react-router-dom** — client-side routing with GitHub Pages SPA fallback
-- **styled-components** — all components use `styledWithConfig` and `data-component-id`
-- **sharp** — album thumbnail and OG image generation at sync time
+- **react-router-dom** : client-side routing with GitHub Pages SPA fallback
+- **styled-components** : all components use `styledWithConfig` and `data-component-id`
+- **sharp** : album thumbnail and OG image generation at sync time

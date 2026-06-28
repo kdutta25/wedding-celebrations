@@ -72,9 +72,9 @@ export type TranslationKey =
 export type Translations = Record<TranslationKey, string>;
 
 const en: Translations = {
-  pageTitle: "Vibha & Kaustubh — Wedding Celebrations",
+  pageTitle: "Vibha & Kaustubh : Wedding Celebrations",
   pageDescription:
-    "Relive the Haldi, Mehndi, and Wedding celebrations of Vibha & Kaustubh — February 26, 2023.",
+    "Relive the Haldi, Mehndi, and Wedding celebrations of Vibha & Kaustubh : February 26, 2023.",
   toolbarTitle: "Vibha & Kaustubh",
   landingKicker: "Together with their families",
   landingLead:
@@ -100,7 +100,7 @@ const en: Translations = {
   weddingTitle: "Wedding",
   weddingKicker: "Welcome to our wedding",
   weddingLead:
-    "Browse photos from our wedding day — February 26, 2023 in Ottawa.",
+    "Browse photos from our wedding day : February 26, 2023 in Ottawa.",
   weddingHeroAlt: "Welcome to the wedding of Vibha & Kaustubh",
   ceremonyTitle: "Ceremony Proceedings",
   ceremonyKicker: "Sacred traditions",
@@ -112,7 +112,7 @@ const en: Translations = {
   gallerySub: "Tap any photo to view it full size.",
   galleryEmpty: "No photos yet. Run npm run dev to sync albums from Desktop.",
   galleryLoadingMore: "Loading more photos…",
-  galleryProgress: "{{visible}} of {{total}} photos — scroll down for more",
+  galleryProgress: "{{visible}} of {{total}} photos : scroll down for more",
   galleryProgressComplete: "All {{total}} photos loaded",
   openPhoto: "Open photo {{n}}",
   photoAlt: "Celebration photo {{n}}",
@@ -141,16 +141,16 @@ const en: Translations = {
   footerDesigned: "Designed and developed by Kaus",
   footerCopyright: "Copyright © {{year}} KD",
   footerBuilt: "Built with React, TypeScript and Vite",
-  footerYoutubeAria: "YouTube — Kaus Diaries",
+  footerYoutubeAria: "YouTube : Kaus Diaries",
   footerInstagramAria: "Instagram",
-  footerGithubAria: "GitHub — wedding-celebrations",
+  footerGithubAria: "GitHub : wedding-celebrations",
 };
 
 const hi: Translations = {
   ...en,
-  pageTitle: "विभा और Kaustubh — विवाह उत्सव",
+  pageTitle: "विभा और Kaustubh : विवाह उत्सव",
   pageDescription:
-    "विभा और Kaustubh के हल्दी, मेंहदी और विवाह उत्सव की यादें — 26 फरवरी, 2023।",
+    "विभा और Kaustubh के हल्दी, मेंहदी और विवाह उत्सव की यादें : 26 फरवरी, 2023।",
   toolbarTitle: "विभा और Kaustubh",
   landingKicker: "अपने परिवारों के साथ",
   landingLead:
@@ -183,7 +183,7 @@ const hi: Translations = {
   galleryEmpty: "अभी कोई फोटो नहीं है।",
   galleryLoadingMore: "और फोटो लोड हो रही हैं…",
   galleryProgress:
-    "{{visible}} / {{total}} फोटो — और देखने के लिए नीचे स्क्रॉल करें",
+    "{{visible}} / {{total}} फोटो : और देखने के लिए नीचे स्क्रॉल करें",
   galleryProgressComplete: "सभी {{total}} फोटो लोड हो गईं",
   photoAlt: "उत्सव की फोटो {{n}}",
   galleryPhoto: "फोटो {{n}} / {{total}}",
@@ -194,9 +194,9 @@ const hi: Translations = {
 
 const pa: Translations = {
   ...en,
-  pageTitle: "ਵਿਭਾ ਅਤੇ Kaustubh — ਵਿਆਹ ਦੇ ਜਸ਼ਨ",
+  pageTitle: "ਵਿਭਾ ਅਤੇ Kaustubh : ਵਿਆਹ ਦੇ ਜਸ਼ਨ",
   pageDescription:
-    "ਵਿਭਾ ਅਤੇ Kaustubh ਦੇ ਹਲਦੀ, Mehndi ਅਤੇ ਵਿਆਹ ਦੇ ਜਸ਼ਨ — 26 ਫਰਵਰੀ, 2023।",
+    "ਵਿਭਾ ਅਤੇ Kaustubh ਦੇ ਹਲਦੀ, Mehndi ਅਤੇ ਵਿਆਹ ਦੇ ਜਸ਼ਨ : 26 ਫਰਵਰੀ, 2023।",
   toolbarTitle: "ਵਿਭਾ ਅਤੇ Kaustubh",
   landingKicker: "ਆਪਣੇ ਪਰਿਵਾਰਾਂ ਨਾਲ",
   landingLead:
@@ -232,9 +232,9 @@ const pa: Translations = {
 
 const bn: Translations = {
   ...en,
-  pageTitle: "বিবা ও Kaustubh — বিবাহ উৎসব",
+  pageTitle: "বিবা ও Kaustubh : বিবাহ উৎসব",
   pageDescription:
-    "বিবা ও Kaustubh-এর হলুদ, mehndi ও বিবাহ উৎসবের স্মৃতি — ২৬ ফেব্রুয়ারি, ২০২৩।",
+    "বিবা ও Kaustubh-এর হলুদ, mehndi ও বিবাহ উৎসবের স্মৃতি : ২৬ ফেব্রুয়ারি, ২০২৩।",
   toolbarTitle: "বিবা ও Kaustubh",
   landingKicker: "তাদের পরিবারের সাথে",
   landingLead:
