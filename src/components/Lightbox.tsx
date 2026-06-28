@@ -1,15 +1,12 @@
 import { useEffect, useCallback, useState } from "react";
 import { FiDownload } from "react-icons/fi";
-import styledWithConfig, { keyframes } from "../utils/styledWithConfig";
+import styledWithConfig from "../utils/styledWithConfig";
 import { useI18n } from "../i18n/I18nContext";
 import { useLightboxImageCache } from "../hooks/useLightboxImageCache";
 import { useSwipeNavigation } from "../hooks/useSwipeNavigation";
 import { type AlbumId } from "../utils/photos";
+import { LightboxLoader } from "./loaders/LightboxLoader";
 import { Snackbar } from "./Snackbar";
-
-const spin = keyframes`
-  to { transform: rotate(360deg); }
-`;
 
 const Overlay = styledWithConfig("div")`
   position: fixed;
@@ -85,35 +82,10 @@ const LoadingPanel = styledWithConfig("div")`
   position: absolute;
   inset: 0;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 16px;
   border-radius: 12px;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px dashed rgba(255, 255, 255, 0.18);
-`;
-
-const Spinner = styledWithConfig("div")`
-  width: 52px;
-  height: 52px;
-  border-radius: 999px;
-  border: 3px solid rgba(255, 255, 255, 0.18);
-  border-top-color: var(--accent);
-  animation: ${spin} 0.85s linear infinite;
-
-  @media (prefers-reduced-motion: reduce) {
-    animation: none;
-    border-top-color: rgba(255, 255, 255, 0.65);
-  }
-`;
-
-const LoadingText = styledWithConfig("p")`
-  margin: 0;
-  color: rgba(255, 255, 255, 0.88);
-  font-size: 15px;
-  font-weight: 700;
-  letter-spacing: 0.04em;
+  background: rgba(255, 255, 255, 0.04);
 `;
 
 const CloseButton = styledWithConfig("button")`
@@ -274,10 +246,13 @@ export function Lightbox({
             aria-live="polite"
             aria-label={loadingLabel}
           >
-            <Spinner data-component-id="LightboxSpinner" aria-hidden="true" />
-            <LoadingText data-component-id="LightboxLoadingText">
-              {error ? t("lightboxLoadError") : loadingLabel}
-            </LoadingText>
+            <LightboxLoader
+              albumId={albumId}
+              progress={progress}
+              error={Boolean(error)}
+              errorMessage={t("lightboxLoadError")}
+              loadingMessage={loadingLabel}
+            />
           </LoadingPanel>
         ) : null}
 

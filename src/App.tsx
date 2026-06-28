@@ -15,6 +15,7 @@ import { CeremonyTimeline } from "./components/CeremonyTimeline";
 import { PeacockDecorations } from "./components/PeacockDecorations";
 import { SectionDecorations } from "./components/SectionDecorations";
 import { SiteFooter } from "./components/SiteFooter";
+import { SiteBootLoader } from "./components/loaders/SiteBootLoader";
 import { loadPhotos } from "./utils/photos";
 import { viewFromPathname, ROUTES } from "./routes";
 import { useI18n } from "./i18n/I18nContext";
@@ -70,11 +71,56 @@ export default function App() {
   const view = viewFromPathname(location.pathname);
   const [haldiPhotos, setHaldiPhotos] = useState<string[]>([]);
   const [weddingPhotos, setWeddingPhotos] = useState<string[]>([]);
+  const [bootProgress, setBootProgress] = useState(0);
+  const [bootVisible, setBootVisible] = useState(true);
 
   useEffect(() => {
-    void loadPhotos("haldi").then(setHaldiPhotos);
-    void loadPhotos("wedding").then(setWeddingPhotos);
+    let cancelled = false;
+    let haldiDone = false;
+    let weddingDone = false;
+
+    const creep = window.setInterval(() => {
+      setBootProgress((value) => (value >= 92 ? value : value + 1));
+    }, 60);
+
+    const tryFinish = () => {
+      if (!haldiDone || !weddingDone) return;
+      setBootProgress(100);
+    };
+
+    const bump = () => {
+      const doneCount = Number(haldiDone) + Number(weddingDone);
+      if (doneCount === 1) {
+        setBootProgress((value) => Math.max(value, 55));
+      }
+      tryFinish();
+    };
+
+    void loadPhotos("haldi").then((photos) => {
+      if (cancelled) return;
+      haldiDone = true;
+      setHaldiPhotos(photos);
+      bump();
+    });
+
+    void loadPhotos("wedding").then((photos) => {
+      if (cancelled) return;
+      weddingDone = true;
+      setWeddingPhotos(photos);
+      bump();
+    });
+
+    return () => {
+      cancelled = true;
+      window.clearInterval(creep);
+    };
   }, []);
+
+  useEffect(() => {
+    if (bootProgress < 100) return;
+    const timer = window.setTimeout(() => setBootVisible(false), 420);
+    return () => window.clearTimeout(timer);
+  }, [bootProgress]);
 
   useEffect(() => {
     const section =
@@ -88,10 +134,12 @@ export default function App() {
   }, [location.pathname, view]);
 
   return (
-    <Page data-component-id="Page">
-      <PeacockDecorations view={view} />
-      <SectionDecorations view={view} />
-      <Shell data-component-id="Shell">
+    <>
+      <SiteBootLoader progress={bootProgress} visible={bootVisible} />
+      <Page data-component-id="Page">
+        <PeacockDecorations view={view} />
+        <SectionDecorations view={view} />
+        <Shell data-component-id="Shell">
         <PreferencesBar view={view} />
 
         <Routes>
@@ -142,7 +190,8 @@ export default function App() {
         </Routes>
 
         <SiteFooter />
-      </Shell>
-    </Page>
+        </Shell>
+      </Page>
+    </>
   );
 }
