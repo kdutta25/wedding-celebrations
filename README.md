@@ -171,21 +171,7 @@ Place photo folders on your Desktop (or edit source paths in `scripts/sync-album
 | `npm run preview` | Preview production build locally |
 | `npm run deploy` | Build and publish `dist/` to GitHub Pages |
 
-Production builds use base path `/wedding-celebrations/` and inject absolute URLs from `.env.production`.
-
----
-
-## Link previews (WhatsApp / Facebook)
-
-Share the home page URL after deploy, e.g. `https://kdutta25.github.io/wedding-celebrations/`.
-
-Open Graph tags use absolute HTTPS URLs for `og-preview.jpg`. Configure your live URL in `.env.production`:
-
-```bash
-VITE_SITE_URL=https://your-domain.com
-```
-
-If previews look stale, refresh the cache in the [Facebook Sharing Debugger](https://developers.facebook.com/tools/debug/) and re-send the link in WhatsApp.
+Production builds serve at the site root (`/`) on `https://wedding.kaustubhdutta.com` (see `public/CNAME` and `.env.production`).
 
 ---
 

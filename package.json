@@ -2,7 +2,7 @@
   "name": "wedding-celebrations",
   "private": true,
   "version": "1.0.0",
-  "homepage": "https://kdutta25.github.io/wedding-celebrations",
+  "homepage": "https://wedding.kaustubhdutta.com",
   "type": "module",
   "scripts": {
     "prestart": "node scripts/sync-album.mjs",

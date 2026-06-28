@@ -4,11 +4,9 @@ import react from "@vitejs/plugin-react";
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), "");
   const siteUrl = (
-    env.VITE_SITE_URL ?? "https://kdutta25.github.io/wedding-celebrations"
+    env.VITE_SITE_URL ?? "https://wedding.kaustubhdutta.com"
   ).replace(/\/$/, "");
-  const base =
-    env.VITE_BASE_PATH ??
-    (mode === "production" ? "/wedding-celebrations/" : "/");
+  const base = env.VITE_BASE_PATH ?? "/";
 
   return {
     base,
